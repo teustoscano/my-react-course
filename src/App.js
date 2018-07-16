@@ -45,22 +45,37 @@ class App extends Component {
 
   render() {
     const style = {
-    	backgroundColor: 'white',
+    	backgroundColor: 'green',
+    	color: 'white',
     	font: 'inherit',
-    	border: '1px solid #03a',
+    	border: '1px solid #000',
     	padding: '8px'
     };
 
-    return (
-      <div className="App">
-      	<button style={style} onClick={this.togglePersonsHandler}>View Persons</button>
-      	{this.state.showPersons ? 
-      	<div>
+    let persons = null;
+
+    if(this.state.showPersons){
+    	persons = (
+    		<div>
       		{this.state.persons.map((person, index) => {
-      			return <Person click={() => this.deletePersonHandler(index)} name={person.name} age={person.age} key={person.id} changed={(event) => this.nameChangeHandler(event, person.id)}/>
+      			return <Person 
+      				click={() => this.deletePersonHandler(index)}
+      				name={person.name}
+      				age={person.age}
+      				key={person.id}
+      				changed={(event) => this.nameChangeHandler(event, person.id)}/>
       		})}
       	</div>
-      	: null}
+    	);
+
+    	style.backgroundColor = 'red';
+    }
+
+    return (
+      <div className="App">
+      	<h1>That's a React App</h1>
+      	<button style={style} onClick={this.togglePersonsHandler}>View Persons</button>
+      	{persons}
       </div>
     );
   }
